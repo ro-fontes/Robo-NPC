@@ -8,7 +8,6 @@ using Panda;
 public class AI : MonoBehaviour
 {
     //Criando as variaveis
-    [Header("Teste")]
     [Tooltip("Transform do Player")]
     public Transform player;
     [Tooltip("Spawn da bala")]
