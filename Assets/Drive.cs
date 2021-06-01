@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Drive : MonoBehaviour {
-
+public class Drive : MonoBehaviour 
+{
+    //Variaveis
 	float speed = 20.0F;
     float rotationSpeed = 120.0F;
     public GameObject bulletPrefab;
@@ -17,6 +18,7 @@ public class Drive : MonoBehaviour {
         transform.Translate(0, 0, translation);
         transform.Rotate(0, rotation, 0);
 
+        //Ao apertao Barra de espaco, efetua um disparo
         if(Input.GetKeyDown("space"))
         {
             GameObject bullet = GameObject.Instantiate(bulletPrefab, bulletSpawn.transform.position, bulletSpawn.transform.rotation);
