@@ -8,14 +8,19 @@ using Panda;
 public class AI : MonoBehaviour
 {
     //Criando as variaveis
+    [Header("Teste")]
+    [Tooltip("Transform do Player")]
     public Transform player;
+    [Tooltip("Spawn da bala")]
     public Transform bulletSpawn;
-    public Slider healthBar;   
-    public GameObject bulletPrefab;
+    [Tooltip("Barra de vida")]
+    public Slider healthBar;
+    [Tooltip("Prefab da Bala")]
+    public GameObject bulletPrefab;//Prefab da bala
 
     NavMeshAgent agent;
-    public Vector3 destination; // The movement destination.
-    public Vector3 target;      // The position to aim to.
+    public Vector3 destination; // Vetor de destino
+    public Vector3 target;      // posicao do inimigo.
     float health = 100.0f;
     float rotSpeed = 5.0f;
     float visibleRange = 80.0f;
@@ -58,8 +63,8 @@ public class AI : MonoBehaviour
     [Task]
     public void PickRandomDestination()
     {
-        Vector3 dest = new Vector3(Random.Range(-100, 100), 0, Random.Range(-100, 100));
-        agent.SetDestination(dest);
+        Vector3 dest = new Vector3(Random.Range(-100, 100), 0, Random.Range(-100, 100)); // definindo o destino
+        agent.SetDestination(dest); //Setando o destino do inimigo 
         Task.current.Succeed();
     }
 
@@ -70,7 +75,6 @@ public class AI : MonoBehaviour
         if (Task.isInspected)
         {
             Task.current.debugInfo = string.Format("t={0:0.00}", Time.time);
-            
         }
         if(agent.remainingDistance <= agent.stoppingDistance && !agent.pathPending)
         {
@@ -91,7 +95,7 @@ public class AI : MonoBehaviour
     [Task]
     public void TargetPlayer()
     {
-        target = player.transform.position;
+        target = player.transform.position; //Pegando a posicao do jogador
         Task.current.Succeed();
     }
 
@@ -155,14 +159,14 @@ public class AI : MonoBehaviour
     [Task]
     public bool IsHealthLessThan(float health)
     {
-        return this.health < health;
+        return this.health < health;//Verificando se ele esta vivo
     }
 
     [Task]
     public bool Explode()
     {
-        Destroy(healthBar.gameObject);
-        Destroy(this.gameObject);
+        Destroy(healthBar.gameObject);//Destroi a barra de vida
+        Destroy(this.gameObject);// destroi o inimigo(Este gameobject)
         return true;
     }
 }
